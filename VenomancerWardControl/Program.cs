@@ -43,7 +43,7 @@ namespace VenomancerWardControl
                         if (GetDistance2D(enemy.Position, plagueward.Position) < plagueward.AttackRange && Utils.SleepCheck(plagueward.Handle.ToString()))
                         {
                             plagueward.Attack(enemy);
-                            Utils.Sleep(1500, plagueward.Handle.ToString());
+                            Utils.Sleep(1000, plagueward.Handle.ToString());
                         }
                     }
                 }
@@ -57,7 +57,7 @@ namespace VenomancerWardControl
                         if (GetDistance2D(creep.Position, plagueward.Position) < plagueward.AttackRange && Utils.SleepCheck(plagueward.Handle.ToString()))
                         {
                             plagueward.Attack(creep);
-                            Utils.Sleep(1500, plagueward.Handle.ToString());
+                            Utils.Sleep(1000, plagueward.Handle.ToString());
                         }
                     }
                 else if (creep.Team == me.Team && creep.Health > (PlagueWardDamage[plagueWardLevel] * (1 - creep.DamageResist)) && creep.Health < (PlagueWardDamage[plagueWardLevel] * (1 - creep.DamageResist) + 88))
@@ -66,7 +66,7 @@ namespace VenomancerWardControl
                         if (GetDistance2D(creep.Position, plagueward.Position) < plagueward.AttackRange && Utils.SleepCheck(plagueward.Handle.ToString()))
                         {
                             plagueward.Attack(creep);
-                            Utils.Sleep(1500, plagueward.Handle.ToString());
+                            Utils.Sleep(1000, plagueward.Handle.ToString());
                         }
                     }
             }
