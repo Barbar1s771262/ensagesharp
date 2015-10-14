@@ -25,7 +25,10 @@ namespace LastHitMarker
                 return;
 
             var myDamage = me.DamageAverage;
-            var creeps = ObjectMgr.GetEntities<Unit>().Where(creep => creep.IsAlive && creep.IsVisible && (creep.ClassID == ClassID.CDOTA_BaseNPC_Creep_Lane || creep.ClassID == ClassID.CDOTA_BaseNPC_Creep_Siege)).ToList();
+            var creeps = ObjectMgr.GetEntities<Unit>().Where(creep => creep.IsAlive && creep.IsVisible && (creep.ClassID == ClassID.CDOTA_BaseNPC_Creep_Lane || creep.ClassID == ClassID.CDOTA_BaseNPC_Creep_Siege) && creep.IsSpawned).ToList();
+
+            if (!creeps.Any())
+                return;
 
             foreach (var creep in creeps)
             {
@@ -34,15 +37,15 @@ namespace LastHitMarker
                 if (!Drawing.WorldToScreen(enemyPos, out screenPos))
                     continue;
 
-                var start = screenPos + new Vector2(25, -28);
+                var start = screenPos + new Vector2(-5, -30);
 
                 if (creep.Health > 0 && creep.Health < myDamage * (1 - creep.DamageResist) + 1)
                 {
-                        Drawing.DrawRect(start, new Vector2((float)15 * screenX, (float)15 * screenX), Drawing.GetTexture(@"vgui\hud\minimap_creep.vmat"));
+                        Drawing.DrawRect(start, new Vector2((float)18 * screenX, (float)18 * screenX), Drawing.GetTexture("materials/vgui/hud/minimap_creep.vmat"));
                 }
                 else if (creep.Health < myDamage + 88)
                 {
-                        Drawing.DrawRect(start, new Vector2((float)15 * screenX, (float)15 * screenX), Drawing.GetTexture(@"vgui\hud\minimap_glow.vmat"));
+                        Drawing.DrawRect(start, new Vector2((float)18 * screenX, (float)18 * screenX), Drawing.GetTexture("materials/vgui/hud/minimap_glow.vmat"));
                 }
             }
         }
