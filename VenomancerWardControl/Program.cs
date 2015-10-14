@@ -9,7 +9,7 @@ namespace VenomancerWardControl
 {
     internal class Program
     {
-        private static readonly uint[] PlagueWardDamage = {10, 19, 29, 38};
+        private static readonly uint[] PlagueWardDamage = { 10, 19, 29, 38 };
         private static void Main(string[] args)
         {
             Game.OnUpdate += Game_OnUpdate;
@@ -19,14 +19,14 @@ namespace VenomancerWardControl
         {
             if (!Game.IsInGame || !Utils.SleepCheck("VenomancerWardControl"))
                 return;
-            Utils.Sleep(125,"VenomancerWardControl");
+            Utils.Sleep(125, "VenomancerWardControl");
 
             var me = ObjectMgr.LocalHero;
             if (me == null || me.ClassID != ClassID.CDOTA_Unit_Hero_Venomancer)
                 return;
 
             var plagueWardLevel = me.FindSpell("venomancer_plague_ward").Level - 1;
-            
+
             var enemies = ObjectMgr.GetEntities<Hero>().Where(hero => hero.IsAlive && !hero.IsIllusion && hero.IsVisible && hero.Team == me.GetEnemyTeam()).ToList();
             var creeps = ObjectMgr.GetEntities<Creep>().Where(creep => (creep.ClassID == ClassID.CDOTA_BaseNPC_Creep_Lane || creep.ClassID == ClassID.CDOTA_BaseNPC_Creep_Siege) && creep.IsAlive && creep.IsVisible && creep.IsSpawned).ToList();
             var plaguewards = ObjectMgr.GetEntities<Unit>().Where(plagueward => plagueward.ClassID == ClassID.CDOTA_BaseNPC_Venomancer_PlagueWard && plagueward.IsAlive && plagueward.IsVisible && plagueward.IsSelectable).ToList();
@@ -43,7 +43,7 @@ namespace VenomancerWardControl
                         if (GetDistance2D(enemy.Position, plagueward.Position) < plagueward.AttackRange && Utils.SleepCheck(enemy.Handle.ToString()))
                         {
                             plagueward.Attack(enemy);
-                            Utils.Sleep(1000, enemy.Handle.ToString());
+                            Utils.Sleep(1000, plagueward.Handle.ToString());
                         }
                     }
                 }
@@ -57,16 +57,16 @@ namespace VenomancerWardControl
                         if (GetDistance2D(creep.Position, plagueward.Position) < plagueward.AttackRange && Utils.SleepCheck(creep.Handle.ToString()))
                         {
                             plagueward.Attack(creep);
-                            Utils.Sleep(1000, creep.Handle.ToString());
+                            Utils.Sleep(1000, plagueward.Handle.ToString());
                         }
                     }
-                else if(creep.Team == me.Team && creep.Health > (PlagueWardDamage[plagueWardLevel] * (1 - creep.DamageResist)) && creep.Health < (PlagueWardDamage[plagueWardLevel] * (1 - creep.DamageResist) + 88))
+                else if (creep.Team == me.Team && creep.Health > (PlagueWardDamage[plagueWardLevel] * (1 - creep.DamageResist)) && creep.Health < (PlagueWardDamage[plagueWardLevel] * (1 - creep.DamageResist) + 88))
                     foreach (var plagueward in plaguewards)
                     {
                         if (GetDistance2D(creep.Position, plagueward.Position) < plagueward.AttackRange && Utils.SleepCheck(creep.Handle.ToString()))
                         {
                             plagueward.Attack(creep);
-                            Utils.Sleep(1000, creep.Handle.ToString());
+                            Utils.Sleep(1000, plagueward.Handle.ToString());
                         }
                     }
             }
