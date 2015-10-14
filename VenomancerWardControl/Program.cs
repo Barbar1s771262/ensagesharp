@@ -40,7 +40,7 @@ namespace VenomancerWardControl
                 {
                     foreach (var plagueward in plaguewards)
                     {
-                        if (GetDistance2D(enemy.Position, plagueward.Position) < plagueward.AttackRange && Utils.SleepCheck(enemy.Handle.ToString()))
+                        if (GetDistance2D(enemy.Position, plagueward.Position) < plagueward.AttackRange && Utils.SleepCheck(plagueward.Handle.ToString()))
                         {
                             plagueward.Attack(enemy);
                             Utils.Sleep(1000, plagueward.Handle.ToString());
@@ -54,7 +54,7 @@ namespace VenomancerWardControl
                 if (creep.Team == me.GetEnemyTeam() && creep.Health > 0 && creep.Health < (PlagueWardDamage[plagueWardLevel] * (1 - creep.DamageResist) + 20))
                     foreach (var plagueward in plaguewards)
                     {
-                        if (GetDistance2D(creep.Position, plagueward.Position) < plagueward.AttackRange && Utils.SleepCheck(creep.Handle.ToString()))
+                        if (GetDistance2D(creep.Position, plagueward.Position) < plagueward.AttackRange && Utils.SleepCheck(plagueward.Handle.ToString()))
                         {
                             plagueward.Attack(creep);
                             Utils.Sleep(1000, plagueward.Handle.ToString());
@@ -63,7 +63,7 @@ namespace VenomancerWardControl
                 else if (creep.Team == me.Team && creep.Health > (PlagueWardDamage[plagueWardLevel] * (1 - creep.DamageResist)) && creep.Health < (PlagueWardDamage[plagueWardLevel] * (1 - creep.DamageResist) + 88))
                     foreach (var plagueward in plaguewards)
                     {
-                        if (GetDistance2D(creep.Position, plagueward.Position) < plagueward.AttackRange && Utils.SleepCheck(creep.Handle.ToString()))
+                        if (GetDistance2D(creep.Position, plagueward.Position) < plagueward.AttackRange && Utils.SleepCheck(plagueward.Handle.ToString()))
                         {
                             plagueward.Attack(creep);
                             Utils.Sleep(1000, plagueward.Handle.ToString());
